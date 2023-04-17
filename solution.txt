@@ -1,0 +1,8 @@
+git restore filename
+this will restore the chnges [D[D[D[D[D[D[Ca[C[D[D[D[D[D[D[D[D[C[C[C[Cfile [chnges [D[D[D[D[Da[C[C[D[Dnges that are made indside the
+folder. Restore it at previous level.
+
+git restore --staged filenme
+will remove file from stage bucket that we have added in stage to
+commit changes. now i want to not commit that then we will use it 
+first then git restore filename.
