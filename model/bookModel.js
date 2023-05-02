@@ -9,9 +9,12 @@ const authorSchema = new mongoose.Schema({
 
 const bookSchema = new mongoose.Schema({
     name : String,
-    author_id : Number,
     price : Number,
-    ratings : Number
+    ratings : Number,
+    author :{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'author'
+    }
 },{ timestamps : true})
 
 module.exports.author = mongoose.model("author", authorSchema)

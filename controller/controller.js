@@ -1,8 +1,9 @@
 const models = require('../model/bookModel.js')
 
-const check = function(req, res){
-    res.send({msg : models})
-    console.log(models)
+const check = async function(req, res){
+    let data = await models.book.find().populate('author').select( {name:true, address:true, _id:0  })
+
+    res.send({msg : data})
 }
 
 const createBook = async function(req,res){
