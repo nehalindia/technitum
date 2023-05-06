@@ -2,23 +2,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('../routes/route.js');
-const { default: mongoose } = require('mongoose');
+const moments = require('moment')
 const app = express();
 
-//parseing the data
+//MiddleWare
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const logger = (req,res,next) => {
+    console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
+    console.log(`${moments().format()}`);
+    console.log(`${req.ip}`);
+    next();
+}
 
-//DataBase connectivity
-mongoose.connect("mongodb+srv://nehaluddindpe:RCGtWC3HqBQUfNeR@cluster0.wzbtyg0.mongodb.net/nehal01", {
-    useNewUrlParser: true
-})
-.then( () => console.log("MongoDb is connected"))
-.catch ( err => console.log(err) )
 
-//routing url
-app.use('/', route);
+app.use('/',logger, route);
+
 
 //server start
 app.listen(process.env.PORT || 3000, function () {

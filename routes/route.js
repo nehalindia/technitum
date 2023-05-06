@@ -2,24 +2,47 @@
 const express = require('express');
 const router = express.Router();
 
-//import module 
-const authorController= require("../controllers/authorController")
-const bookController= require("../controllers/bookController")
-const publisherController = require("../controllers/publisherController")
-
-//authorcontroller
-router.post("/createAuthor", authorController.createAuthor  )
-router.get("/getAuthorsData", authorController.getAuthorsData)
-
-//bookcontroller
-router.post("/createBook", bookController.createBook  )
-router.get("/getBooksData", bookController.getBooksData)
-router.get("/getBooksWithAuthorDetails", bookController.getBooksWithAuthorDetails )
-router.put("/createAttribute", bookController.createAttribute)
-router.put("/updateRating", bookController.updateRating)
-
-//publisherController
-router.post("/createPublisher", publisherController.createPublisher )
-router.get("/getPublisher", publisherController.getPublisher )
-
+router.get('/my', function(req,res){
+    console.log("this is my")
+    res.send({msg: "this is my route"})
+})
+router.get('/my1', function(req,res){
+    console.log("this is my1")
+    res.send({msg: "this is my1 route"})
+})
+router.get('/my2', function(req,res){
+    console.log("this is my2")
+    res.send({msg: "this is my2 route"})
+})
 module.exports = router;
+
+// ASSIGNMENT :-
+// Write a middleware that logs (console.log) some data everytime any API is hit
+// Data to be logged:-the current timestamp(as date time) , the IP of the user and the route being requested).
+// For this first figure out how to get the route location being request, how to get current timestamp and how to get the IP.
+// NOTE: ip of local computer will come as ::1 so dont get disturbed by seeing this)
+//  
+// e.g: you should be logging something like this on each line:
+// time , IP, Route should be printed on each line in terminal( every time an api is hit)
+// 2010-08-19 14:00:00 , 123.459.898.734 , /createUser
+//  
+// SOLUTION:
+//  
+// //create a middleware using app.use(functionName) so that this piece of code gets called everytime any api is called
+//  
+// const assignmentMW= function (req, res, next) {
+//     var currentdate = new Date(); 
+//     var datetime =  currentdate.getDate() + " "
+//                     + (currentdate.getMonth()+1)  + " " 
+//                     + currentdate.getFullYear() + "  "  
+//                     + currentdate.getHours() + ":"  
+//                     + currentdate.getMinutes() + ":" 
+//                     + currentdate.getSeconds();
+//  
+//     let ip= req.ip
+//     let url= req.originalUrl
+//     console.log(`${datetime}  ${ip}  ${url}`)
+//     next()    
+// }
+//  
+// app.use( assignmentMW )
