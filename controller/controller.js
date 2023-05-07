@@ -41,8 +41,7 @@ const createOrder = async function(req,res){
             }
             else{
                 data.amount = 0
-                data.isFreeAppUser = req.headers.isfreeappuser
-
+                data.isFreeAppUser = req.headers.isFreeAppUser
                 let saveData = await orderModel.create(data)
                 res.send({ msg : saveData})
             }
