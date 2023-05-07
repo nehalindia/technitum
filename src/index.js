@@ -1,26 +1,26 @@
-// Package importation 
 const express = require('express');
-const bodyParser = require('body-parser');
-const route = require('../routes/route.js');
-const moments = require('moment')
+const mongoose = require('mongoose');
+const bodyparser = require('body-parser');
+const route = require('../route/route');
 const app = express();
 
-//MiddleWare
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({extended : true}));
 
-const logger = (req,res,next) => {
-    console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
-    console.log(`${moments().format()}`);
-    console.log(`${req.ip}`);
-    next();
-}
+mongoose.connect("mongodb+srv://nehaluddindpe:RCGtWC3HqBQUfNeR@cluster0.wzbtyg0.mongodb.net/nehal01", {
+    useNewUrlParser: true
+})
+.then( () => console.log("MongoDb is connected"))
+.catch ( err => console.log(err) )
 
+// app.use(function(req,res,next){
+//     req.headers['isFreeAppUser']=true
+//     //console.log("default")
+//     next();
+// })
 
-app.use('/',logger, route);
+app.use('/',route);
 
-
-//server start
-app.listen(process.env.PORT || 3000, function () {
-    console.log('Express app running on port ' + (process.env.PORT || 3000))
-});
+app.listen(process.env.PORT || 3000, function(){
+    console.log("server has started on "+ (process.env.PORT || 3000))
+})
