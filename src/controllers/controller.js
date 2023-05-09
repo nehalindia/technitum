@@ -14,7 +14,7 @@ const loginUser = async function(req,res){
     let saveData = await userModel.findOne({emailId: data.emailId, password:data.password})
     if(!saveData){res.send({status:false,Msg:"Wrong EmailId and password"})}
     let token =    await jwt.sign({
-        userId : saveData._id.toString(),
+        userId : (saveData._id).toString(),
         batch : "Technatioum",
         organization : "FunctionUP"
     },
@@ -22,7 +22,6 @@ const loginUser = async function(req,res){
     );
     
     res.setHeader('x-auth-token', token);
-    console.log(res)
     res.send({ status : true, token:token})
 }
 
@@ -56,7 +55,7 @@ const deleteUser = async function(req,res){
     let userdata =req.body
     console.log(userdata)
     let saveData = await userModel.findOneAndUpdate( { _id:id } , userdata,{new : true});
-    res.send({ status: saveData, data: saveData });
+    res.send({ status: true, data: saveData });
 }
 
 

@@ -15,7 +15,7 @@ const authonticate = function(req,res,next){
     
     let id = req.params.userid
     if(id == decodedToken.userId){
-      console.log({status:"token is valid and user match" ,msg :decodedToken})
+      console.log({status:"token is valid and user match"})
       next()
     }
     else{
